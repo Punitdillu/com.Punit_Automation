@@ -18,14 +18,18 @@ public class Create_Organization {
 			Random ran=new Random();
 			int x=ran.nextInt(1000);
 			String orgnam="Apple"+x;
+			String browser=System.getProperty("browser");
+			String url=System.getProperty("url");
+			String username=System.getProperty("username");
+			String password=System.getProperty("password");
 			
 				WebDriverManager.chromedriver().setup();
 				WebDriver driver =new ChromeDriver();
 				driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
 				driver.manage().window().maximize();
-				driver.get("http://localhost:8888/");
-				driver.findElement(By.name("user_name")).sendKeys("admin");
-				driver.findElement(By.name("user_password")).sendKeys("root");
+				driver.get(url);
+				driver.findElement(By.name("user_name")).sendKeys(username);
+				driver.findElement(By.name("user_password")).sendKeys(password);
 				driver.findElement(By.id("submitButton")).click();
 				driver.findElement(By.xpath("//a[text()='Organizations']")).click();
 				driver.findElement(By.xpath("//img[@src=\"themes/softed/images/btnL3Add.gif\"]")).click();
