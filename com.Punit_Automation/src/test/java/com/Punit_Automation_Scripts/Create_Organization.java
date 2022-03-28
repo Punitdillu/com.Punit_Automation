@@ -7,6 +7,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.edge.EdgeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.annotations.Test;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
@@ -22,9 +24,23 @@ public class Create_Organization {
 			String url=System.getProperty("url");
 			String username=System.getProperty("username");
 			String password=System.getProperty("password");
+			WebDriver driver=null;
+			
+			if(browser.equals("chrome")) {
 			
 				WebDriverManager.chromedriver().setup();
-				WebDriver driver =new ChromeDriver();
+				 driver=new ChromeDriver();
+			}
+			else if(browser.equals("firefox")) {
+				
+				WebDriverManager.firefoxdriver().setup();
+				 driver=new FirefoxDriver();
+			}
+			else{
+				
+				WebDriverManager.edgedriver().setup();
+				 driver=new EdgeDriver();
+			}
 				driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
 				driver.manage().window().maximize();
 				driver.get(url);
